@@ -13,24 +13,64 @@ const Table = styled(({ cols, ...props }) => (
 const Cell = styled.div`
   width: 70px;
   display: flex;
+  height: 40px;
   text-align: center;
   justify-content: center;
   position: sticky;
   white-space: nowrap;
-  background-color: #ebeeff;
-  color: #000000;
+  background-color:rgb(71, 70, 70);
   padding: 1px 3px;
   border: 1px solid #9c9c9c;
   align-items: center;
 
   input {
-     width: 65px;
+    width: 65px;
+    margin: 5px;
+    height: 30px;
+    background:rgb(60, 60, 60);
+    color: white;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 2px 8px;
+
+    &[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &:hover {
+      box-shadow: 0 0 0 1px white, 0 0 0 2px #3a3c3f;
+    }
   }
 `
 
 const Button = styled.button`
-  padding: 2px;
-  margin: 3px;
+  padding: 7px 12px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  transition: .2s linear;
+  margin: 10px 5px;
+  background:rgb(79, 81, 83);
+  &:hover {
+    box-shadow: 0 0 0 1px white, 0 0 0 2px #3a3c3f;
+  }
+`
+
+const Xbutton = styled.button`
+  padding: 3px 7px;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  transition: .2s linear;
+  background:rgb(112, 113, 113);
+  margin-left: 7px;
 `
 
 const EditableTable = ({ initialData, onChange }) => {
@@ -86,18 +126,18 @@ const EditableTable = ({ initialData, onChange }) => {
         {data[0].map((_, colIndex) => (
           <Cell key={colIndex}>
             B{colIndex + 1}
-            <button onClick={() => handleRemoveColumn(colIndex)} disabled={data[0].length <= 1}>
+            <Xbutton onClick={() => handleRemoveColumn(colIndex)} disabled={data[0].length <= 1}>
               X
-            </button>
+            </Xbutton>
           </Cell>
         ))}
         {data.map((row, rowIndex) => (
           <React.Fragment key={rowIndex}>
             <Cell>
               A{rowIndex + 1}
-              <button onClick={() => handleRemoveRow(rowIndex)} disabled={data.length <= 1}>
+              <Xbutton onClick={() => handleRemoveRow(rowIndex)} disabled={data.length <= 1}>
                 X
-              </button>
+              </Xbutton>
             </Cell>
             {row.map((cell, colIndex) => (
               <Cell key={colIndex}>

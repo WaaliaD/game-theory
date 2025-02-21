@@ -10,13 +10,36 @@ const Wraper = styled.div`
 `
 
 const Input = styled.input`
-  margin: 10px;
+  margin: 10px 5px;
+  width: 100px;
+  height: 30px;
+  background:rgb(79, 81, 83);
+  color: white;
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 2px 8px;
+
+  &[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &:hover {
+    box-shadow: 0 0 0 1px white, 0 0 0 2px #3a3c3f;
+  }
 `
 
 const LogTable = styled(({ cols, ...props }) => (
   <div {...props}>{props.children}</div>
 ))`
   margin: 10px;
+  font-size: 16px;
   display: grid;
   overflow: auto;
   max-width: 100%;
@@ -24,22 +47,23 @@ const LogTable = styled(({ cols, ...props }) => (
 `
 
 const HeadCell = styled.div`
-  width: 35px;
+  padding: 5px;
+  width: 45px;
   display: flex;
   justify-content: center;
   white-space: nowrap;
-  background-color: #ebeeff;
-  padding: 1px 3px;
+  background-color:rgb(33, 33, 33);
   border: 1px solid #9c9c9c;
 `
 
 const Cell = styled.div`
-  width: 35px;
+  width: 40px;
   display: flex;
   justify-content: center;
   white-space: nowrap;
-  padding: 1px 3px;
-  border: 1px solid #9c9c9c;
+  padding: 5px;
+  width: 45px;
+  border: 1px solid rgb(160, 160, 160);
 `
 
 const PersentTable = styled.div`
@@ -58,11 +82,27 @@ const PersentTable = styled.div`
   }
 `
 
+const Button = styled.button`
+  user-select: none;
+  padding: 7px;
+  width: 80px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  transition: .2s linear;
+  margin: 10px 5px;
+  background:rgb(79, 81, 83);
+  &:hover {
+    box-shadow: 0 0 0 1px white, 0 0 0 2px #3a3c3f;
+  }
+`
+
 function App() {
   const [tableData, setTableData] = useState([[3, 6, 8],[9, 4, 2],[7, 5, 4]]);
   const [iterCount, setIterCount] = useState(10);
   const [solveData, setSolveData] = useState([]);
   const [usesStat, setUsesStat] = useState([]);
+  const [isTableShown, setIsTableShow] = useState(true);
 
   const colsCount = useMemo(() => 6+tableData[0]?.length + tableData?.length, [tableData])
 
@@ -87,7 +127,6 @@ function App() {
 
     return [`B${index+1}`, newaCumulativePayoffs, Math.max(...newaCumulativePayoffs) ];
   }
-
 
   const solve = () => {
     const arr = [];
@@ -158,14 +197,14 @@ function App() {
         <ul>
           {Object.entries(aPercentages).map(([key, value]) => (
             <li key={key}>
-              {key}: {value}
+              {key}: {value} ({aUse[key]})
             </li>
           ))}
         </ul>
         <ul>
           {Object.entries(bPercentages).map(([key, value]) => (
             <li key={key}>
-              {key}: {value}
+              {key}: {value} ({bUse[key]})
             </li>
           ))}
         </ul>
@@ -174,7 +213,7 @@ function App() {
   }
 
   const renderTable = () => {
-    if (solveData.length)
+    if (solveData.length && isTableShown)
       return (
         <LogTable cols={colsCount} >
           <HeadCell>k</HeadCell>
@@ -205,7 +244,8 @@ function App() {
     <Wraper>
       <div>
         <Input type='number' value={iterCount} onInput={(e) => setIterCount(e.target.value)}/>
-        <button onClick={solve}>Расчитать</button>
+        <Button onClick={solve}>Расчитать</Button>
+        <Button onClick={() => setIsTableShow(prev => !prev)}>{isTableShown ? 'Скрыть' : 'Показать'}</Button>
       </div>
 
       <EditableTable initialData={tableData} onChange={(newData) => setTableData(newData)} />
