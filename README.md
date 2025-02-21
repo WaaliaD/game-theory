@@ -1,8 +1,7 @@
-# React + Vite
+# Поиск приближенного решения игры, заданного матрицей, методом Брауна
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### [Ознакомиться можно по ссылке](https://waaliad.github.io/game-theory)
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![image](https://github.com/user-attachments/assets/8a14804f-7a87-4617-95b4-3b4f6cd9f31f)
+![image](https://github.com/user-attachments/assets/62e3d2a2-f240-4e4f-a67c-d0a64e2cd69a)
+![image](https://github.com/user-attachments/assets/e3f1f551-3870-4112-96b8-8fdbcc07431c)
