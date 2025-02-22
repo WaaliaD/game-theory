@@ -142,9 +142,9 @@ function App() {
 
       arr.push([
         aChoice,
-        ...bCumulative,
+        ...bCumulative.map(num => parseFloat(num.toFixed(2))),
         bChoice,
-        ...aCumulative,
+        ...aCumulative.map(num => parseFloat(num.toFixed(2))),
         Math.round(vMin * 100) / 100,
         Math.round(vMax * 100) / 100,
         Math.round(((vMin + vMax) / 2) * 100) / 100,

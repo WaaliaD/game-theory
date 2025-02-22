@@ -111,7 +111,13 @@ const EditableTable = ({ initialData, onChange }) => {
   };
 
   // Изменение значения ячейки
-  const handleCellChange = (rowIndex, colIndex, value) => {
+  const handleCellChange = (rowIndex, colIndex, value) =>
+    setData(data.map((row, rIdx) =>
+      rIdx === rowIndex ? row.map((cell, cIdx) => (cIdx === colIndex ? value : cell)) : row
+    ));
+
+  // Валидация значения ячейки
+  const valiadteChange = (rowIndex, colIndex, value) => {
     const newData = data.map((row, rIdx) =>
       rIdx === rowIndex ? row.map((cell, cIdx) => (cIdx === colIndex ? Number(value) : cell)) : row
     );
@@ -145,6 +151,7 @@ const EditableTable = ({ initialData, onChange }) => {
                   type="number"
                   value={cell}
                   onChange={(e) => handleCellChange(rowIndex, colIndex, e.target.value)}
+                  onBlur={(e) => valiadteChange(rowIndex, colIndex, e.target.value)}
                 />
               </Cell>
             ))}
